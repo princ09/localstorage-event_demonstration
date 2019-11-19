@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>contact</title>
+  <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+</head>
+<body>
+       
+    <h1>Contact</h1>
+<script>
+
+
+// listen to storage event
+$(window).ready(function(){
+  window.addEventListener('storage', function(event){
+    // do what you want on logout-event
+    if (event.key == 'logout-event') {
+      $('#console').html('Received logout event! Insert logout script here.');
+      window.close();
+    }
+}, false);
+});
+</script>
+</body>
+</html>

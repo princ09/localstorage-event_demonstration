@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>Product</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+<body>
+        <div id="console">
+                open this page in many tabs and press logout in one of them!
+              </div>
+              
+            <button type=button id="logout">Logout</button>
+
+<script>
+function lsTest(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+// listen to storage event
+window.addEventListener('storage', function(event){
+    // do what you want on logout-event
+    if (event.key == 'logout_event') {
+      $('#console').html('Received logout event! Insert logout script here.');
+      window.location = 'logout.html';
+    }
+}, false);
+
+$(document).ready(function(){
+  if(lsTest()) {
+    $('#logout').on('click', function(){
+      // change logout-event and therefore send an event
+      localStorage.setItem('logout_event', 'logout' + Math.random());
+      return true;
+    });   
+  } else {
+     // setInterval or setTimeout
+     console.log('not working');
+  }
+});
+</script>
+</body>
+</html>

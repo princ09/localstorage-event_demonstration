@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+
+</head>
+<body>
+<h1>Home</h1>
+<div id="console">
+        open this page in many tabs and press logout in one of them!
+      </div>
+          
+
+<button onclick="fun1()">About</button>
+<button onclick="fun2()">product</button>
+<button onclick="fun3()">contact</button>
+<button onclick="closeOther()">Close</button>
+<br>
+<br>
+<br>
+<button type=button id="logout">Logout</button>
+<script>
+    var mywin = [];
+function fun1(){
+     mywin[0] = open('about.html', '_blank');
+    }
+function fun2(){
+     mywin[1] = open('product.html', '_blank');
+    }
+function fun3(){
+     mywin[2] = open('contact.html', '_blank');
+    }
+function lsTest(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+function closeOther(){
+    for(let i=0 ; i < mywin.length ; i++){
+        mywin[i].close();
+    }
+}
+/*
+function fun4(){
+    var storedWin = localStorage.getItem('tablists');
+    console.log(storedWin);
+}
+/*
+
+window.addEventListener('storage', function(e) {  
+ console.log('Woohoo, someone changed my localstorage va another tab/window!');
+});
+
+function setData(){
+  console.log('SET');
+  localStorage.setItem('superpower', 'heatvision');
+}
+
+function clearData(){
+  console.log('CLEAR');
+  localStorage.clear()
+}
+  
+*/
+// listen to storage event
+$(window).ready(function(){
+  window.addEventListener('storage', function(event){
+    // do what you want on logout-event
+    if (event.key == 'logout-event') {
+      $('#console').html('other window Closed!!!');
+      
+    }
+}, false);
+});
+
+
+$(window).ready(function(){
+  if(lsTest()) {
+    $('#logout').on('click', function(){
+      // change logout-event and therefore send an event
+      localStorage.setItem('logout-event', 'logout' + Math.random());
+      return true;
+    });   
+  } else {
+     // setInterval or setTimeout
+     console.log('not working');
+  }
+});
+</script>
+</body>
+</html>
